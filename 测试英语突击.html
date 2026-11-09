@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>测试英语突击 · 软件测试面试英语打卡</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2314161A'/%3E%3Ctext x='32' y='34' font-family='monospace' font-size='24' font-weight='700' fill='%23F7F5EF' text-anchor='middle'%3EEN%3C/text%3E%3Cpath d='M18 44l7 7 16-18' stroke='%232FA36B' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#14161A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="测试英语">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --paper:#F3F1EA; --card:#FFFDF8; --ink:#14161A; --green:#1E6B4F; --green2:#2FA36B;
+  --red:#C4472E; --muted:#6B6A66; --line:#DAD5C8; --tap:#EDEAE0;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);font-family:'Noto Sans SC',system-ui,-apple-system,'PingFang SC','Microsoft YaHei',sans-serif;font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.mono{font-family:'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace}
+
+/* ---------- 头部 ---------- */
+.hd{position:sticky;top:0;z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.hd-in{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px 9px;max-width:1080px;margin:0 auto}
+.logo{width:34px;height:34px;border-radius:8px;background:var(--ink);color:#F7F5EF;display:flex;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:15px;letter-spacing:.5px;flex:none}
+.brand{display:flex;align-items:center;gap:9px;min-width:0}
+.brand-t{font-family:'Noto Serif SC',serif;font-weight:900;font-size:16px;letter-spacing:.5px;line-height:1.2}
+.brand-s{font-family:'IBM Plex Mono',monospace;font-size:9.5px;color:var(--muted);letter-spacing:1.4px;margin-top:2px}
+.streak{display:flex;align-items:center;gap:5px;border:1px solid var(--line);background:var(--card);border-radius:100px;padding:5px 11px;font-size:12px;white-space:nowrap;flex:none}
+.streak b{font-family:'IBM Plex Mono',monospace;color:var(--red);font-size:13px}
+.tabs{display:flex;overflow-x:auto;gap:2px;padding:0 10px 0;max-width:1080px;margin:0 auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;border:0;background:none;padding:9px 12px 11px;font-size:13.5px;color:var(--muted);font-family:inherit;position:relative;cursor:pointer;min-height:44px}
+.tab.on{color:var(--ink);font-weight:700}
+.tab.on::after{content:"";position:absolute;left:10px;right:10px;bottom:3px;height:3px;background:var(--red)}
+
+/* ---------- 通用 ---------- */
+.wrap{max-width:1080px;margin:0 auto;padding:14px 16px 40px}
+.view{display:none}
+.view.on{display:block}
+.panel{background:var(--card);border:1px solid var(--line);margin-bottom:14px}
+.panel-hd{display:flex;align-items:baseline;justify-content:space-between;gap:10px;padding:10px 13px;border-bottom:1px dashed var(--line)}
+.panel-t{font-family:'Noto Serif SC',serif;font-weight:700;font-size:14px;letter-spacing:.3px}
+.panel-meta{font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--muted)}
+.panel-bd{padding:12px 13px}
+.sect-h{display:flex;align-items:baseline;gap:9px;margin:18px 0 9px}
+.sect-h h2{font-family:'Noto Serif SC',serif;font-size:15px;margin:0;font-weight:700}
+.sect-h span{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted)}
+
+/* ---------- 单词卡 ---------- */
+.wcard{background:var(--card);border:1px solid var(--line);padding:11px 13px 10px;margin-bottom:9px;position:relative}
+.wcard.done{border-color:var(--green2);background:#FAFDF9}
+.w-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.w-w{font-family:'Noto Serif SC',serif;font-weight:700;font-size:19px;line-height:1.3;word-break:break-word}
+.w-ipa{font-family:'IBM Plex Mono',monospace;font-size:12.5px;color:var(--green);margin-top:2px}
+.w-zh{font-size:13.5px;margin-top:5px}
+.w-ex{font-size:12.5px;color:#3C3A36;margin-top:7px;padding-top:7px;border-top:1px dotted var(--line)}
+.w-ex b{font-weight:500;color:var(--ink)}
+.w-ex span{display:block;color:var(--muted);font-size:11.5px;margin-top:2px}
+.spk{width:44px;height:44px;min-width:44px;border:1px solid var(--line);border-radius:50%;background:var(--tap);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:0}
+.spk:active{background:#E2DDD0}
+.spk svg{width:19px;height:19px;stroke:var(--ink);fill:none;stroke-width:1.8}
+.spk.playing{background:var(--green2);border-color:var(--green2)}
+.spk.playing svg{stroke:#fff}
+.tag{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:9.5px;letter-spacing:.6px;padding:1px 6px;border:1px solid var(--line);color:var(--muted);background:var(--paper)}
+
+/* ---------- 今日 ---------- */
+.today-top{display:flex;gap:10px;align-items:center;margin-bottom:13px}
+.ring{width:64px;height:64px;flex:none;position:relative}
+.ring svg{width:64px;height:64px}
+.ring .rv{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:'IBM Plex Mono',monospace;font-size:15px;font-weight:600;line-height:1}
+.ring .rl{font-size:8.5px;color:var(--muted);letter-spacing:.8px}
+.today-p{flex:1;min-width:0}
+.today-p .tp1{font-family:'Noto Serif SC',serif;font-weight:700;font-size:14.5px}
+.today-p .tp2{font-size:12px;color:var(--muted);margin-top:2px}
+.check-btn{width:100%;border:0;background:var(--ink);color:#FFFDF8;font-family:'Noto Serif SC',serif;font-weight:700;font-size:15px;letter-spacing:1px;padding:14px;cursor:pointer;margin-top:4px;min-height:48px}
+.check-btn:disabled{background:#C9C4B6;color:#7E7A6E}
+.check-btn.done{background:var(--green)}
+.hint{font-size:11.5px;color:var(--muted);text-align:center;margin-top:7px}
+
+/* ---------- 句子卡 ---------- */
+.scard{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--green);padding:11px 13px;margin-bottom:9px}
+.scard-hd{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.scard-t{font-size:11.5px;color:var(--muted)}
+.scard-en{font-size:14px;line-height:1.75;margin-top:7px;font-weight:500}
+.scard-zh{font-size:12.5px;color:var(--muted);margin-top:6px;padding-top:6px;border-top:1px dotted var(--line)}
+.scard-note{font-size:11.5px;color:var(--green);margin-top:6px}
+
+/* ---------- 复习 ---------- */
+.rev-card{background:var(--card);border:1px solid var(--line);padding:22px 16px;text-align:center;margin-bottom:12px}
+.rev-q{font-family:'Noto Serif SC',serif;font-size:20px;font-weight:700;line-height:1.5}
+.rev-ipa{font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--green);margin-top:6px}
+.rev-a{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line);display:none}
+.rev-a.on{display:block}
+.rev-btns{display:flex;gap:8px;margin-top:14px}
+.btn{flex:1;border:1px solid var(--ink);background:var(--card);color:var(--ink);padding:12px;font-size:13.5px;font-family:inherit;cursor:pointer;min-height:46px}
+.btn.pri{background:var(--ink);color:#FFFDF8}
+.btn.okv{border-color:var(--green2);color:var(--green);background:#F6FBF8}
+.rdone{text-align:center;padding:26px 14px;border:1px dashed var(--line);color:var(--muted);font-size:13px}
+
+/* ---------- 打卡 ---------- */
+.stat-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:13px}
+.stat{background:var(--card);border:1px solid var(--line);padding:10px 11px}
+.stat b{display:block;font-family:'IBM Plex Mono',monospace;font-size:21px;line-height:1.2}
+.stat span{font-size:11px;color:var(--muted)}
+.cal{display:grid;grid-template-columns:repeat(13,1fr);gap:4px}
+.cal i{aspect-ratio:1;background:var(--tap);display:block}
+.cal i.on{background:var(--green2)}
+.cal i.today{outline:2px solid var(--red);outline-offset:1px}
+.cal-lg{font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--muted);margin-top:7px}
+.log-item{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px dotted var(--line);font-size:12.5px}
+.log-item:last-child{border-bottom:0}
+.log-d{font-family:'IBM Plex Mono',monospace;font-size:12px}
+.log-m{color:var(--muted);font-size:11px}
+
+/* ---------- 工具栏 ---------- */
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:11px}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--muted);font-size:12px;padding:7px 11px;cursor:pointer;font-family:inherit;min-height:38px}
+.chip.on{background:var(--ink);color:#FFFDF8;border-color:var(--ink)}
+.search{width:100%;border:1px solid var(--line);background:var(--card);padding:10px 12px;font-size:16px;font-family:inherit;margin-bottom:11px}
+.empty{text-align:center;padding:26px 12px;color:var(--muted);font-size:13px;border:1px dashed var(--line);background:var(--card)}
+
+/* ---------- 桌面 ---------- */
+@media (min-width:760px){
+  .cols{display:grid;grid-template-columns:1fr 1fr;gap:0 14px;align-items:start}
+  .cols > *{min-width:0}
+  #todayWords,#wordList,#sentList{display:grid;grid-template-columns:1fr 1fr;gap:0 12px;align-items:start}
+  #todayWords > *, #wordList > *, #sentList > *{min-width:0}
+  #sentList > .sect-h{grid-column:1/-1}
+  .w-w{font-size:21px}
+  .cal{grid-template-columns:repeat(20,1fr)}
+  .check-btn{max-width:460px;margin-left:auto;margin-right:auto}
+  .today-top{max-width:460px}
+}
+@media (prefers-reduced-motion:no-preference){
+  .view.on{animation:fade .18s ease-out}
+  @keyframes fade{from{opacity:.6}to{opacity:1}}
+}
+</style>
+</head>
+<body>
+
+<header class="hd">
+  <div class="hd-in">
+    <div class="brand">
+      <div class="logo">EN</div>
+      <div>
+        <div class="brand-t">测试英语突击</div>
+        <div class="brand-s">QA ENGLISH · 打卡积累</div>
+      </div>
+    </div>
+    <div class="streak" id="streakChip">连续 <b>0</b> 天</div>
+  </div>
+  <nav class="tabs" id="tabs">
+    <button class="tab on" data-view="today">今日</button>
+    <button class="tab" data-view="words">词库</button>
+    <button class="tab" data-view="sents">句子段落</button>
+    <button class="tab" data-view="review">复习<span id="revBadge" style="display:none;margin-left:4px;background:#C4472E;color:#fff;font-family:'IBM Plex Mono',monospace;font-size:9.5px;padding:1px 5px;border-radius:9px;vertical-align:1px"></span></button>
+    <button class="tab" data-view="log">我的打卡</button>
+  </nav>
+</header>
+
+<main class="wrap">
+
+  <!-- ===== 今日 ===== -->
+  <section class="view on" id="v-today">
+    <div class="panel">
+      <div class="panel-hd">
+        <div class="panel-t" id="todayTitle">今日任务</div>
+        <div class="panel-meta" id="todayMeta"></div>
+      </div>
+      <div class="panel-bd">
+        <div class="today-top">
+          <div class="ring">
+            <svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="28" fill="none" stroke="#DAD5C8" stroke-width="4"/>
+              <circle id="ringArc" cx="32" cy="32" r="28" fill="none" stroke="#1E6B4F" stroke-width="4" stroke-dasharray="176" stroke-dashoffset="176" stroke-linecap="round" transform="rotate(-90 32 32)"/></svg>
+            <div class="rv"><span id="ringNum">0</span><span class="rl" id="ringTotal">/ 11</span></div>
+          </div>
+          <div class="today-p">
+            <div class="tp1" id="tp1">先过一遍今天的卡片</div>
+            <div class="tp2" id="tp2">点卡片右下角「记住了」，全部过完即可打卡</div>
+          </div>
+        </div>
+        <button class="check-btn" id="btnCheck" disabled>打卡</button>
+        <div class="hint" id="checkHint">今天还没过完，先去下面的卡片</div>
+      </div>
+    </div>
+
+    <div class="sect-h"><h2>今日单词</h2><span id="todayWordCount"></span></div>
+    <div id="todayWords"></div>
+
+    <div class="sect-h"><h2>今日句子</h2><span></span></div>
+    <div id="todaySents"></div>
+
+    <div class="sect-h"><h2>今日面试题</h2><span></span></div>
+    <div id="todayQa"></div>
+  </section>
+
+  <!-- ===== 词库 ===== -->
+  <section class="view" id="v-words">
+    <input class="search" id="wordSearch" type="search" placeholder="搜英文或中文，比如 regression / 回归" autocomplete="off">
+    <div class="chips" id="wordChips"></div>
+    <div id="wordList"></div>
+  </section>
+
+  <!-- ===== 句子段落 ===== -->
+  <section class="view" id="v-sents">
+    <div class="chips" id="sentChips"></div>
+    <div id="sentList"></div>
+  </section>
+
+  <!-- ===== 复习 ===== -->
+  <section class="view" id="v-review">
+    <div class="panel">
+      <div class="panel-hd">
+        <div class="panel-t">到期复习</div>
+        <div class="panel-meta" id="revMeta"></div>
+      </div>
+      <div class="panel-bd" id="revBody"></div>
+    </div>
+  </section>
+
+  <!-- ===== 打卡记录 ===== -->
+  <section class="view" id="v-log">
+    <div class="stat-row">
+      <div class="stat"><b id="stStreak">0</b><span>连续天数</span></div>
+      <div class="stat"><b id="stDays">0</b><span>累计打卡</span></div>
+      <div class="stat"><b id="stWords">0</b><span>学过的词</span></div>
+    </div>
+    <div class="panel">
+      <div class="panel-hd"><div class="panel-t">打卡日历</div><div class="panel-meta">最近 13 周</div></div>
+      <div class="panel-bd">
+        <div class="cal" id="cal"></div>
+        <div class="cal-lg" id="calLegend"></div>
+      </div>
+    </div>
+    <div class="panel">
+      <div class="panel-hd"><div class="panel-t">打卡明细</div><div class="panel-meta" id="logCount"></div></div>
+      <div class="panel-bd" id="logBody"></div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+const CATS={
+  intro:'自我介绍', term:'测试术语', bug:'缺陷与用例', proc:'流程与环境', tool:'工具与CI', comm:'沟通与面试'
+};
+const WORDS=[
+ /* 自我介绍 */
+ {id:'w1',c:'intro',w:'experience',ipa:'/ɪkˈspɪəriəns/',p:'n.',zh:'经验；经历',ex:'I have three years of experience in software testing.',exz:'我有三年软件测试经验。'},
+ {id:'w2',c:'intro',w:'background',ipa:'/ˈbækɡraʊnd/',p:'n.',zh:'背景；出身',ex:'My background is in computer science.',exz:'我的专业背景是计算机。'},
+ {id:'w3',c:'intro',w:'responsible',ipa:'/rɪˈspɒnsəbl/',p:'adj.',zh:'负责的；承担责任的',ex:'I was responsible for the payment module.',exz:'我负责支付模块。'},
+ {id:'w4',c:'intro',w:'familiar',ipa:'/fəˈmɪliə/',p:'adj.',zh:'熟悉的',ex:'I am familiar with API testing and CI pipelines.',exz:'我熟悉接口测试和 CI 流水线。'},
+ {id:'w5',c:'intro',w:'proficient',ipa:'/prəˈfɪʃənt/',p:'adj.',zh:'熟练的',ex:'I am proficient in Python and Postman.',exz:'我熟练使用 Python 和 Postman。'},
+ {id:'w6',c:'intro',w:'collaborate',ipa:'/kəˈlæbəreɪt/',p:'v.',zh:'协作；配合',ex:'I collaborate closely with developers and product managers.',exz:'我和开发、产品保持紧密协作。'},
+ {id:'w7',c:'intro',w:'candidate',ipa:'/ˈkændɪdət/',p:'n.',zh:'候选人；应试者',ex:'As a candidate, I focus on real testing experience.',exz:'作为候选人，我更强调真实的测试经验。'},
+ {id:'w8',c:'intro',w:'strength',ipa:'/streŋθ/',p:'n.',zh:'优势；长处',ex:'My biggest strength is finding edge cases.',exz:'我最大的优势是能想到边界场景。'},
+ /* 测试术语 */
+ {id:'w9',c:'term',w:'regression',ipa:'/rɪˈɡreʃən/',p:'n.',zh:'回归；回归测试',ex:'We run a regression suite before every release.',exz:'每次发布前我们都会跑回归测试集。'},
+ {id:'w10',c:'term',w:'boundary',ipa:'/ˈbaʊndəri/',p:'n.',zh:'边界',ex:'Boundary values are where most bugs hide.',exz:'边界值是最容易藏 bug 的地方。'},
+ {id:'w11',c:'term',w:'equivalence',ipa:'/ˌiːkwɪˈveɪləns/',p:'n.',zh:'等价（类）',ex:'We split inputs into equivalence classes.',exz:'我们把输入划分成等价类。'},
+ {id:'w12',c:'term',w:'assertion',ipa:'/əˈsɜːʃən/',p:'n.',zh:'断言',ex:'The test failed on the first assertion.',exz:'测试在第一个断言就失败了。'},
+ {id:'w13',c:'term',w:'automation',ipa:'/ˌɔːtəˈmeɪʃən/',p:'n.',zh:'自动化',ex:'Automation covers the happy path, humans cover the rest.',exz:'自动化覆盖主流程，其余靠人。'},
+ {id:'w14',c:'term',w:'flaky',ipa:'/ˈfleɪki/',p:'adj.',zh:'不稳定的（时过时不过）',ex:'This test is flaky, it passes maybe half the time.',exz:'这个用例不稳定，大概一半概率能过。'},
+ {id:'w15',c:'term',w:'sanity',ipa:'/ˈsænəti/',p:'n.',zh:'可用性检查；冒烟',ex:'A quick sanity check confirmed the build was usable.',exz:'做了一次快速可用性检查，确认版本能用。'},
+ {id:'w16',c:'term',w:'corner case',ipa:'/ˈkɔːnə keɪs/',p:'n.',zh:'极端情况；角落场景',ex:'Zero items in the cart is an easy corner case to miss.',exz:'购物车为空这种极端情况很容易被漏掉。'},
+ /* 缺陷与用例 */
+ {id:'w17',c:'bug',w:'reproduce',ipa:'/ˌriːprəˈdjuːs/',p:'v.',zh:'复现',ex:'I can reproduce it every time on Android.',exz:'在安卓上我每次都能复现。'},
+ {id:'w18',c:'bug',w:'severity',ipa:'/sɪˈverəti/',p:'n.',zh:'严重程度',ex:'Severity is about impact, priority is about timing.',exz:'严重程度看影响，优先级看什么时候修。'},
+ {id:'w19',c:'bug',w:'priority',ipa:'/praɪˈɒrəti/',p:'n.',zh:'优先级',ex:'I flagged it as high priority because it blocks checkout.',exz:'我标成高优先级，因为它阻塞下单。'},
+ {id:'w20',c:'bug',w:'expected',ipa:'/ɪkˈspektɪd/',p:'adj.',zh:'预期的',ex:'Expected result: the order is created successfully.',exz:'预期结果：订单创建成功。'},
+ {id:'w21',c:'bug',w:'actual',ipa:'/ˈæktʃuəl/',p:'adj.',zh:'实际的',ex:'Actual result: the page shows a blank screen.',exz:'实际结果：页面白屏。'},
+ {id:'w22',c:'bug',w:'verify',ipa:'/ˈverɪfaɪ/',p:'v.',zh:'验证',ex:'Please verify the fix on staging before we ship.',exz:'上线前请在测试环境验证修复。'},
+ {id:'w23',c:'bug',w:'attach',ipa:'/əˈtætʃ/',p:'v.',zh:'附上；添加',ex:'I attached the logs and a screen recording.',exz:'我附上了日志和录屏。'},
+ {id:'w24',c:'bug',w:'log',ipa:'/lɒɡ/',p:'n.',zh:'日志',ex:'The error log points to a timeout on the payment API.',exz:'错误日志指向支付接口超时。'},
+ /* 流程与环境 */
+ {id:'w25',c:'proc',w:'requirement',ipa:'/rɪˈkwaɪəmənt/',p:'n.',zh:'需求',ex:'The requirement changed after the design review.',exz:'设计评审后需求发生了变化。'},
+ {id:'w26',c:'proc',w:'release',ipa:'/rɪˈliːs/',p:'n./v.',zh:'发布；版本',ex:'The release is scheduled for Thursday night.',exz:'发布时间定在周四晚上。'},
+ {id:'w27',c:'proc',w:'milestone',ipa:'/ˈmaɪlstəʊn/',p:'n.',zh:'里程碑',ex:'Feature freeze is the next milestone.',exz:'下一个里程碑是功能冻结。'},
+ {id:'w28',c:'proc',w:'coverage',ipa:'/ˈkʌvərɪdʒ/',p:'n.',zh:'覆盖率',ex:'Line coverage is 80%, but branch coverage is low.',exz:'行覆盖率 80%，但分支覆盖率偏低。'},
+ {id:'w29',c:'proc',w:'environment',ipa:'/ɪnˈvaɪrənmənt/',p:'n.',zh:'环境',ex:'It works on my local environment but not on staging.',exz:'我本地环境能跑，测试环境不行。'},
+ {id:'w30',c:'proc',w:'rollback',ipa:'/ˈrəʊlbæk/',p:'n./v.',zh:'回滚',ex:'We decided to roll back the release.',exz:'我们决定回滚这次发布。'},
+ {id:'w31',c:'proc',w:'deploy',ipa:'/dɪˈplɔɪ/',p:'v.',zh:'部署',ex:'The service was deployed to production at 2 a.m.',exz:'服务在凌晨两点部署到生产。'},
+ {id:'w32',c:'proc',w:'backlog',ipa:'/ˈbæklɒɡ/',p:'n.',zh:'待办列表；积压',ex:'Those low-priority bugs went into the backlog.',exz:'那些低优先级 bug 进了待办列表。'},
+ /* 工具与CI */
+ {id:'w33',c:'tool',w:'pipeline',ipa:'/ˈpaɪplaɪn/',p:'n.',zh:'流水线',ex:'The pipeline runs unit tests on every commit.',exz:'流水线在每次提交时跑单元测试。'},
+ {id:'w34',c:'tool',w:'monitor',ipa:'/ˈmɒnɪtə/',p:'v.',zh:'监控',ex:'We monitor error rates after each deploy.',exz:'每次部署后我们都监控错误率。'},
+ {id:'w35',c:'tool',w:'alert',ipa:'/əˈlɜːt/',p:'n.',zh:'告警',ex:'The alert fired at 3 a.m. and woke me up.',exz:'告警凌晨三点响了，把我吵醒。'},
+ {id:'w36',c:'tool',w:'incident',ipa:'/ˈɪnsɪdənt/',p:'n.',zh:'故障事件',ex:'We wrote a postmortem after the incident.',exz:'故障之后我们写了复盘。'},
+ {id:'w37',c:'tool',w:'root cause',ipa:'/ˈruːt kɔːz/',p:'n.',zh:'根因',ex:'The root cause was a missing database index.',exz:'根因是少了数据库索引。'},
+ {id:'w38',c:'tool',w:'latency',ipa:'/ˈleɪtənsi/',p:'n.',zh:'延迟',ex:'Latency jumped to 800 ms under load.',exz:'压测下延迟飙到 800 毫秒。'},
+ {id:'w39',c:'tool',w:'throughput',ipa:'/ˈθruːpʊt/',p:'n.',zh:'吞吐量',ex:'Throughput dropped by half after the change.',exz:'这次改动后吞吐量掉了一半。'},
+ {id:'w40',c:'tool',w:'defect rate',ipa:'/dɪˈfekt reɪt/',p:'n.',zh:'缺陷率',ex:'The defect rate went up in the last two sprints.',exz:'最近两个迭代缺陷率上升了。'},
+ /* 沟通与面试 */
+ {id:'w41',c:'comm',w:'clarify',ipa:'/ˈklærəfaɪ/',p:'v.',zh:'澄清；说明白',ex:'Let me clarify one thing before we start.',exz:'开始之前我先澄清一点。'},
+ {id:'w42',c:'comm',w:'trade-off',ipa:'/ˈtreɪd ɒf/',p:'n.',zh:'权衡；取舍',ex:'We accepted a trade-off between speed and accuracy.',exz:'我们在速度和准确性之间做了取舍。'},
+ {id:'w43',c:'comm',w:'stakeholder',ipa:'/ˈsteɪkhəʊldə/',p:'n.',zh:'干系人；相关方',ex:'I kept stakeholders updated every Friday.',exz:'我每周五给相关方同步进展。'},
+ {id:'w44',c:'comm',w:'escalate',ipa:'/ˈeskəleɪt/',p:'v.',zh:'上报；升级问题',ex:'I escalated the risk to my manager early.',exz:'我提前把风险上报给了主管。'},
+ {id:'w45',c:'comm',w:'deadline',ipa:'/ˈdedlaɪn/',p:'n.',zh:'截止日期',ex:'We can hit the deadline if we cut the last test round.',exz:'砍掉最后一轮测试就能赶上截止日。'},
+ {id:'w46',c:'comm',w:'ownership',ipa:'/ˈəʊnəʃɪp/',p:'n.',zh:'主人翁意识；担当',ex:'She took ownership of the whole release.',exz:'她承担了整个发布的责任。'},
+ {id:'w47',c:'comm',w:'confidence',ipa:'/ˈkɒnfɪdəns/',p:'n.',zh:'信心',ex:'I have confidence in this build because the coverage is solid.',exz:'我对这个版本有信心，因为覆盖足够。'},
+ {id:'w48',c:'comm',w:'feedback',ipa:'/ˈfiːdbæk/',p:'n.',zh:'反馈',ex:'Your feedback on my report was helpful.',exz:'你对我报告的反馈很有帮助。'}
+];
+
+const SENTS=[
+ {id:'s1',c:'intro',t:'一句话自我介绍',en:'Hi, I am Ting, a QA engineer with three years of experience in mobile and web testing.',zh:'你好，我是婷，一名有三年移动端和 Web 测试经验的测试工程师。',note:'短、准、先说身份和年限，别背长段落。'},
+ {id:'s2',c:'intro',t:'三句话版本（最常用）',en:'I work on functional testing and API testing. In my last project I owned the payment module and built its automation suite. I enjoy finding edge cases that others miss.',zh:'我做功能测试和接口测试。上一个项目里我负责支付模块，并搭了它的自动化测试集。我喜欢找别人漏掉的边界场景。',note:'结构：做什么 → 做过什么 → 我的特点。'},
+ {id:'s3',c:'intro',t:'完整段落（面试开场可背）',en:'I started as a manual tester and gradually moved into automation. Over the past three years I have worked on both mobile apps and backend services, writing test cases from requirements and turning repetitive checks into automated scripts. What I like most about QA is that every day you have to think about how something could break.',zh:'我从手工测试做起，逐步转到自动化。这三年里我做过移动端和后端服务，从需求出发写用例，并把重复的检查变成自动化脚本。我最喜欢测试的一点是，每天都得去想一件事会怎么坏。',note:'这段背熟，能撑住 40 秒自我介绍不卡壳。'},
+ {id:'s4',c:'proj',t:'一句话说清项目',en:'The project is an e-commerce platform where users can browse, add to cart, and pay with multiple methods.',zh:'这个项目是一个电商平台，用户可以浏览商品、加购，并用多种方式支付。',note:'先给场景，再给技术栈，别一上来就讲微服务。'},
+ {id:'s5',c:'proj',t:'我负责的部分',en:'I was responsible for the payment and order modules. My work included writing test cases, executing regression, and building API automation for the checkout flow.',zh:'我负责支付和订单模块。工作包括写用例、跑回归，以及为下单流程搭接口自动化。',note:'用 "I was responsible for…" 比 "I did…" 更有分量。'},
+ {id:'s6',c:'proj',t:'测试策略段落',en:'For a new feature, I start from the requirement and list the risks first. Then I design cases around boundaries, equivalence classes, and state transitions, and decide which of them deserve automation. Finally I run a smoke test on every build and a full regression before release.',zh:'面对新功能，我先从需求出发列出风险，然后围绕边界、等价类和状态流转设计用例，并判断哪些值得自动化。最后每个构建都跑冒烟，发布前跑全量回归。',note:'这段是「测试思维」的标准答案，面试官很爱听结构。'},
+ {id:'s7',c:'bug',t:'报缺陷模板',en:'Steps to reproduce: open the cart page with two items, then apply a discount code. Expected: the total updates immediately. Actual: the total stays the same until you refresh. It happens on Android 13, Chrome 120, about 8 out of 10 tries.',zh:'复现步骤：购物车有两件商品时输入优惠码。预期：总价立即更新。实际：总价不变，刷新后才更新。安卓 13、Chrome 120 上十次能复现八次。',note:'步骤 → 预期 → 实际 → 环境与概率，四段齐全才算高质量缺陷。'},
+ {id:'s8',c:'bug',t:'用例描述',en:'Given a user with an empty cart, when they click checkout, then the system should show a prompt and keep the page unchanged.',zh:'前置条件是购物车为空，用户点击结算时，系统应弹出提示并保持页面不变。',note:'Given / when / then 是把用例说清楚的捷径。'},
+ {id:'s9',c:'bug',t:'跟开发沟通复现',en:'I can reproduce it on staging, but not locally. Could you check the feature flag on staging? I have attached the logs and a short screen recording.',zh:'我在测试环境能复现，本地不行。你能看一下测试环境的功能开关吗？日志和一段录屏我已经附上了。',note:'先说结论，再给证据，最后给一个具体请求。'}
+];
+
+const QA=[
+ {id:'q1',q:'为什么选择做测试？（Why QA?）',en:'I like the part where you have to prove something works, not just hope it does. In my last project, a bug I found before release saved the team a full rollback, and that feeling is what keeps me in QA.',zh:'我喜欢「证明它确实能用」这件事，而不是「但愿它能用」。上个项目里，我在发布前发现的一个问题，让团队免了一次完整回滚，这种感觉让我一直留在测试这行。',tip:'别答「我细心」。给一个有结果的例子。'},
+ {id:'q2',q:'新功能上手，你先测什么？',en:'I start with the riskiest path: what happens if this breaks in production, and who gets hurt. Then I check the happy path, the boundaries, and the states that can turn inconsistent, like double submission or a timeout in the middle of a payment.',zh:'我先从风险最高的路径开始：这个东西上线后坏了会怎样、谁会受影响。然后覆盖主流程、边界，以及可能造成状态不一致的情况，比如重复提交或支付中途超时。',tip:'答题顺序=风险 → 主流程 → 边界 → 异常状态。'},
+ {id:'q3',q:'讲一个你发现的印象深刻的 bug',en:'A discount code could be applied twice if you clicked fast enough, so users paid less than they should. It only showed up under a slow network, which is why nobody caught it manually. I reproduced it with a network throttle and wrote a test that now runs on every build.',zh:'优惠码在快速连点的情况下能用两次，用户少付了钱。它只在弱网下出现，所以手工测试没人发现。我用限速复现，并写了一条每次构建都跑的测试。',tip:'结构：现象 → 为什么难发现 → 你怎么定位 → 留下了什么防线。'},
+ {id:'q4',q:'自动化用例不稳定，你怎么处理？',en:'First I treat flakiness as a real defect, not noise. I check whether it is timing, shared test data, or an unstable environment. If I cannot fix it within a day, I quarantine the test so it stops blocking others, and I put it on the backlog with an owner.',zh:'我先把「不稳定」当成真缺陷，而不是噪音。我会排查是时序、共享测试数据，还是环境不稳。一天内修不好就先隔离，避免它卡住别人，同时带责任人进待办。',tip:'关键词：quarantine（隔离）、owner（责任人）——显得你懂工程化。'},
+ {id:'q5',q:'和开发对 bug 的判断不一致，怎么办？',en:'I go back to the requirement and the user impact instead of arguing about opinions. If the requirement is unclear, I ask the product manager to decide and write the conclusion down, so the same question does not come back next time.',zh:'我回到需求本身和用户影响，而不是争论观点。如果需求本身不清楚，我会请产品拍板，并把结论写下来，避免同一个问题反复出现。',tip:'把「争论」升级成「决策记录」，是加分项。'},
+ {id:'q6',q:'你怎么判断一个版本能不能发？',en:'I look at three things: whether all blocking cases passed, whether the known issues are acceptable, and whether we can roll back quickly if something goes wrong. If any of them is unclear, I would rather delay than gamble.',zh:'我看三点：阻塞用例是否全过、已知问题是否可以接受、出问题能不能快速回滚。任何一点不清楚，我宁愿延期也不赌。',tip:'答「能发」要给判据，不要只说「测完了」。'}
+];
+
+</script>
+<script>
+/* ================= 基础 ================= */
+const LS='qa-english-v1';
+const $=s=>document.querySelector(s);
+const $$=s=>Array.from(document.querySelectorAll(s));
+
+function todayStr(d){ d=d||new Date(); const p=n=>String(n).padStart(2,'0'); return d.getFullYear()+'-'+p(d.getMonth()+1)+'-'+p(d.getDate()); }
+function addDays(str,n){ const d=new Date(str+'T00:00:00'); d.setDate(d.getDate()+n); return todayStr(d); }
+function dayIndex(str){ return Math.floor(new Date(str+'T00:00:00').getTime()/86400000); }
+
+let state={checkins:[],learned:{},done:{},view:'today'};
+try{
+  const raw=localStorage.getItem(LS);
+  if(raw){ const o=JSON.parse(raw); state=Object.assign(state,o); }
+}catch(e){}
+function save(){ try{ localStorage.setItem(LS,JSON.stringify(state)); }catch(e){} }
+
+const WORDS_BY_ID={}; WORDS.forEach(w=>WORDS_BY_ID[w.id]=w);
+const SENTS_BY_ID={}; SENTS.forEach(s=>SENTS_BY_ID[s.id]=s);
+const QA_BY_ID={}; QA.forEach(q=>QA_BY_ID[q.id]=q);
+
+/* ================= 朗读 ================= */
+let voiceWant=null;
+function pickVoice(){
+  const vs=(window.speechSynthesis&&speechSynthesis.getVoices())||[];
+  if(!vs.length) return null;
+  return vs.find(v=>/en[-_]US/i.test(v.lang)) || vs.find(v=>/en[-_](GB|AU|CA)/i.test(v.lang)) || vs.find(v=>/^en/i.test(v.lang)) || null;
+}
+if('speechSynthesis' in window){
+  voiceWant=pickVoice();
+  speechSynthesis.addEventListener('voiceschanged',()=>{ voiceWant=pickVoice(); });
+}
+let playBtn=null;
+function speak(text,btn){
+  if(!('speechSynthesis' in window)){ toast('这个浏览器不支持朗读，换 Chrome 或 Safari 试试'); return; }
+  speechSynthesis.cancel();
+  if(playBtn) playBtn.classList.remove('playing');
+  playBtn=btn||null;
+  if(playBtn) playBtn.classList.add('playing');
+  const u=new SpeechSynthesisUtterance(text);
+  u.lang='en-US'; u.rate=0.92; u.pitch=1;
+  const v=pickVoice()||voiceWant; if(v) u.voice=v;
+  const clear=()=>{ if(playBtn){ playBtn.classList.remove('playing'); playBtn=null; } };
+  u.onend=clear; u.onerror=clear;
+  speechSynthesis.speak(u);
+}
+function spkBtn(text){
+  return '<button class="spk" data-say="'+encodeURIComponent(text)+'" aria-label="朗读"><svg viewBox="0 0 24 24"><path d="M11 5 6.5 9H3v6h3.5L11 19z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M18 6a9 9 0 0 1 0 12"/></svg></button>';
+}
+
+/* ================= 提示 ================= */
+let toastT=null;
+function toast(msg){
+  let n=document.getElementById('toast');
+  if(!n){ n=document.createElement('div'); n.id='toast';
+    n.style.cssText='position:fixed;left:50%;bottom:26px;transform:translateX(-50%);background:#14161A;color:#FFFDF8;font-size:13px;padding:10px 16px;border-radius:4px;z-index:99;max-width:86vw;text-align:center;line-height:1.5;box-shadow:0 6px 20px rgba(0,0,0,.25)';
+    document.body.appendChild(n);
+  }
+  n.textContent=msg; n.style.opacity='1';
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>{ n.style.transition='opacity .3s'; n.style.opacity='0'; },2200);
+}
+
+/* ================= 今日计划 ================= */
+function todayPlan(dateStr){
+  const d=todayStr();
+  const idx=dayIndex(d);
+  const wStart=(idx*8)%WORDS.length;
+  const words=[];
+  for(let i=0;i<8;i++) words.push(WORDS[(wStart+i)%WORDS.length]);
+  const sStart=(idx*2)%SENTS.length;
+  const sents=[SENTS[sStart],SENTS[(sStart+1)%SENTS.length]];
+  const qa=[QA[idx%QA.length]];
+  return {words,sents,qa,ids:[].concat(words.map(w=>w.id),sents.map(s=>s.id),qa.map(q=>q.id))};
+}
+function isDone(id){ return !!(state.done&&state.done[id]); }
+function markDone(id,val){
+  if(!state.done) state.done={};
+  if(val) state.done[id]=1; else delete state.done[id];
+  save();
+}
+
+/* ================= 渲染：今日 ================= */
+function renderToday(){
+  const plan=todayPlan();
+  const total=plan.ids.length;
+  const doneCount=plan.ids.filter(isDone).length;
+  const checked=state.checkins.find(c=>c.date===todayStr());
+
+  $('#todayMeta').textContent=new Date().toLocaleDateString('zh-CN',{month:'2-digit',day:'2-digit'})+' · '+total+' 项';
+  $('#ringNum').textContent=doneCount;
+  $('#ringTotal').textContent='/ '+total;
+  const arc=$('#ringArc'); if(arc){ const p=doneCount/total; arc.setAttribute('stroke-dashoffset', String(176*(1-p))); }
+  $('#tp1').textContent = checked ? '今天已打卡' : (doneCount===0?'先过一遍今天的卡片':'还剩 '+(total-doneCount)+' 张');
+  $('#tp2').textContent = checked ? '明天会先复习今天的内容，别忘回来' : '点卡片右下角「记住了」，过完即可打卡';
+
+  const btn=$('#btnCheck');
+  if(checked){
+    btn.disabled=true; btn.classList.add('done'); btn.textContent='今天已打卡 ✓';
+    $('#checkHint').textContent='连续 '+streakDays()+' 天 · 累计 '+state.checkins.length+' 次';
+  }else{
+    btn.classList.remove('done');
+    btn.disabled=doneCount<1;
+    btn.textContent=doneCount<1?'打卡':('打卡 · 已完成 '+doneCount+'/'+total);
+    $('#checkHint').textContent=doneCount<1?'至少看过一张卡片才能打卡':(doneCount<total?'还有 '+(total-doneCount)+' 张没标记，也可以先打卡':'今天全部过完，打卡吧');
+  }
+
+  $('#todayWordCount').textContent=plan.words.length+' 个';
+  $('#todayWords').innerHTML=plan.words.map(w=>wordCard(w,true)).join('');
+  $('#todaySents').innerHTML=plan.sents.map(s=>sentCard(s,true)).join('');
+  $('#todayQa').innerHTML=plan.qa.map(q=>qaCard(q,true)).join('');
+  $('#streakChip').innerHTML='连续 <b>'+streakDays()+'</b> 天';
+  updateBadge();
+}
+
+/* ================= 渲染：卡片 ================= */
+function wordCard(w,inToday){
+  const done=isDone(w.id);
+  return '<div class="wcard'+(done?' done':'')+'" data-id="'+w.id+'">'
+    +'<div class="w-top"><div><div class="w-w">'+w.w+'</div>'
+    +'<div class="w-ipa">'+w.ipa+' · '+w.p+'</div></div>'+spkBtn(w.w)+'</div>'
+    +'<div class="w-zh">'+w.zh+'</div>'
+    +'<div class="w-ex"><b>'+w.ex+'</b><span>'+w.exz+'</span></div>'
+    +(inToday?'<div style="margin-top:9px"><button class="chip'+(done?' on':'')+'" data-mark="'+w.id+'" style="min-height:36px">'+(done?'✓ 记住了':'记住了')+'</button></div>':'')
+    +'</div>';
+}
+function sentCard(s,inToday){
+  const done=isDone(s.id);
+  return '<div class="scard'+(done?' done':'')+'" data-id="'+s.id+'" style="'+(done?'border-left-color:#2FA36B;background:#FAFDF9':'')+'">'
+    +'<div class="scard-hd"><div class="scard-t">'+s.t+'</div>'+spkBtn(s.en)+'</div>'
+    +'<div class="scard-en">'+s.en+'</div>'
+    +'<div class="scard-zh">'+s.zh+'</div>'
+    +(s.note?'<div class="scard-note">▸ '+s.note+'</div>':'')
+    +(inToday?'<div style="margin-top:9px"><button class="chip'+(done?' on':'')+'" data-mark="'+s.id+'" style="min-height:36px">'+(done?'✓ 背下来了':'背下来了')+'</button></div>':'')
+    +'</div>';
+}
+function qaCard(q,inToday){
+  const done=isDone(q.id);
+  return '<div class="scard" data-id="'+q.id+'" style="border-left-color:#C4472E;'+(done?'background:#FAFDF9':'')+'">'
+    +'<div class="scard-hd"><div class="scard-t">面试题</div>'+spkBtn(q.en)+'</div>'
+    +'<div class="w-w" style="font-size:14.5px;margin-top:4px">'+q.q+'</div>'
+    +'<div class="scard-en">'+q.en+'</div>'
+    +'<div class="scard-zh">'+q.zh+'</div>'
+    +(q.tip?'<div class="scard-note">▸ '+q.tip+'</div>':'')
+    +(inToday?'<div style="margin-top:9px"><button class="chip'+(done?' on':'')+'" data-mark="'+q.id+'" style="min-height:36px">'+(done?'✓ 练过了':'练过了')+'</button></div>':'')
+    +'</div>';
+}
+
+/* ================= 词库 ================= */
+let wordCat='all';
+function renderWordChips(){
+  const counts={}; WORDS.forEach(w=>counts[w.c]=(counts[w.c]||0)+1);
+  let html='<button class="chip'+((wordCat==='all')?' on':'')+'" data-wcat="all">全部 '+WORDS.length+'</button>';
+  Object.keys(CATS).forEach(k=>{ html+='<button class="chip'+((wordCat===k)?' on':'')+'" data-wcat="'+k+'">'+CATS[k]+' '+(counts[k]||0)+'</button>'; });
+  $('#wordChips').innerHTML=html;
+}
+function renderWords(){
+  const q=($('#wordSearch').value||'').trim().toLowerCase();
+  const list=WORDS.filter(w=>(wordCat==='all'||w.c===wordCat) && (!q|| w.w.toLowerCase().includes(q)||w.zh.includes(q)||w.ex.toLowerCase().includes(q)));
+  if(!list.length){ $('#wordList').innerHTML='<div class="empty">没有匹配的词，换个关键词试试</div>'; return; }
+  if(wordCat==='all'&&!q){
+    let html='';
+    Object.keys(CATS).forEach(k=>{
+      const g=list.filter(w=>w.c===k); if(!g.length) return;
+      html+='<div class="sect-h" style="grid-column:1/-1"><h2>'+CATS[k]+'</h2><span>'+g.length+' 个</span></div>'+g.map(w=>wordCard(w,false)).join('');
+    });
+    $('#wordList').innerHTML=html; return;
+  }
+  $('#wordList').innerHTML=list.map(w=>wordCard(w,false)).join('');
+}
+
+/* ================= 句子 ================= */
+let sentCat='all';
+const SCATS={intro:'自我介绍',proj:'项目说明',bug:'缺陷与用例',qa:'面试问答'};
+function renderSentChips(){
+  let html='<button class="chip'+((sentCat==='all')?' on':'')+'" data-scat="all">全部</button>';
+  Object.keys(SCATS).forEach(k=>{ html+='<button class="chip'+((sentCat===k)?' on':'')+'" data-scat="'+k+'">'+SCATS[k]+'</button>'; });
+  $('#sentChips').innerHTML=html;
+}
+function renderSents(){
+  let html='';
+  const sents=SENTS.filter(s=>sentCat==='all'||s.c===sentCat);
+  if(sents.length){ html+=sents.map(s=>sentCard(s,false)).join(''); }
+  const qas=QA.filter(q=>sentCat==='all'||sentCat==='qa');
+  if(qas.length){ html+='<div class="sect-h"><h2>面试问答</h2><span>'+qas.length+' 题</span></div>'+qas.map(q=>qaCard(q,false)).join(''); }
+  $('#sentList').innerHTML = html || '<div class="empty">这个分类还没有内容</div>';
+}
+
+/* ================= 复习 ================= */
+const LEVELS=[1,1,3,7,14,30];
+function dueItems(){
+  const d=todayStr();
+  return Object.keys(state.learned||{}).filter(id=>{
+    const it=state.learned[id];
+    return it && it.due && it.due<=d;
+  }).map(id=>({id,it:state.learned[id]}));
+}
+let revQueue=null;
+function renderReview(){
+  const due=dueItems();
+  $('#revMeta').textContent=due.length? (due.length+' 项到期') : '暂无到期';
+  if(!due.length){
+    $('#revBody').innerHTML='<div class="rdone">今天没有到期复习。<br>打卡后，学过的内容会在第二天、第三天、第七天自动回到这里。</div>';
+    return;
+  }
+  if(!revQueue || revQueue.length===0) revQueue=due.slice();
+  const first=revQueue[0];
+  const w=WORDS_BY_ID[first.id], s=SENTS_BY_ID[first.id]||null, q=QA_BY_ID[first.id]||null;
+  const head = w? w.w : (s? s.t : (q? q.q : first.id));
+  const sub  = w? (w.ipa+' · '+w.p) : '句子 / 问答';
+  const body = w? ('<b>'+w.zh+'</b><div class="w-ex" style="text-align:left"><b>'+w.ex+'</b><span>'+w.exz+'</span></div>')
+      : (s? ('<div class="scard-en" style="text-align:left">'+s.en+'</div><div class="scard-zh">'+s.zh+'</div>')
+      : ('<div class="scard-en" style="text-align:left">'+q.en+'</div><div class="scard-zh">'+q.zh+'</div>'));
+  $('#revBody').innerHTML='<div class="rev-card">'
+    +'<div class="scard-t">还剩 '+revQueue.length+' 项</div>'
+    +'<div class="rev-q">'+head+'</div><div class="rev-ipa">'+sub+'</div>'
+    +'<div style="margin-top:12px;display:flex;justify-content:center">'+spkBtn(w?w.w:(s?s.en:q.en))+'</div>'
+    +'<div class="rev-a" id="revA">'+body+'</div>'
+    +'<div class="rev-btns"><button class="btn" id="btnShow">看答案</button></div>'
+    +'</div>'
+    +'<div style="font-size:11.5px;color:#6B6A66;line-height:1.7;border-top:1px dashed #DAD5C8;padding-top:10px">'
+    +'复习节奏：第二天 → 第 3 天 → 第 7 天 → 第 14 天 → 第 30 天。答对往后推，答错回到明天。</div>';
+  $('#btnShow').addEventListener('click',()=>{
+    const a=$('#revA'); if(!a) return;
+    a.classList.add('on');
+    $('#revBody').querySelector('.rev-btns').innerHTML='<button class="btn okv" id="btnForgot">忘了，再来</button><button class="btn pri" id="btnKnow">记得</button>';
+    $('#btnKnow').addEventListener('click',()=>gradeRev(first.id,true));
+    $('#btnForgot').addEventListener('click',()=>gradeRev(first.id,false));
+  });
+}
+function gradeRev(id,know){
+  const it=state.learned[id]||{lv:1,due:todayStr()};
+  let lv=it.lv||1;
+  if(know){ lv=Math.min(LEVELS.length-1,lv+1); } else { lv=Math.max(1,lv-1); }
+  const gap = know? LEVELS[lv] : 1;
+  state.learned[id]={lv,due:addDays(todayStr(),gap)};
+  save();
+  revQueue=revQueue.filter(x=>x.id!==id);
+  toast(know? '记得 · '+gap+' 天后再复习' : '明天再来一次');
+  renderReview(); renderLog(); updateBadge();
+}
+
+/* ================= 到期徽标 ================= */
+function updateBadge(){
+  const n=dueItems().length, b=$('#revBadge');
+  if(!b) return;
+  b.style.display=n?'inline':'none'; b.textContent=n>99?'99+':String(n);
+}
+/* ================= 打卡 ================= */
+function streakDays(){
+  const set=new Set(state.checkins.map(c=>c.date));
+  let n=0, d=todayStr();
+  if(!set.has(d)) d=addDays(d,-1);
+  while(set.has(d)){ n++; d=addDays(d,-1); }
+  return n;
+}
+function doCheck(){
+  const plan=todayPlan();
+  const doneIds=plan.ids.filter(isDone);
+  if(!doneIds.length){ toast('先看一张卡片再打卡'); return; }
+  if(state.checkins.some(c=>c.date===todayStr())){ toast('今天已经打过卡了'); return; }
+  state.checkins.push({
+    date:todayStr(), count:doneIds.length, total:plan.ids.length,
+    ids:doneIds, w:doneIds.filter(i=>WORDS_BY_ID[i]).length,
+    s:doneIds.filter(i=>SENTS_BY_ID[i]).length, q:doneIds.filter(i=>QA_BY_ID[i]).length
+  });
+  doneIds.forEach(id=>{
+    const cur=state.learned[id];
+    if(!cur || !cur.lv){ state.learned[id]={lv:1,due:addDays(todayStr(),1)}; }
+  });
+  save();
+  renderToday(); renderLog(); renderReview(); updateBadge();
+  toast('打卡成功 · 明天先复习今天的 '+doneIds.length+' 项');
+}
+
+/* ================= 打卡记录 ================= */
+function renderLog(){
+  $('#stStreak').textContent=streakDays();
+  $('#stDays').textContent=state.checkins.length;
+  $('#stWords').textContent=Object.keys(state.learned||{}).filter(k=>WORDS_BY_ID[k]).length;
+
+  const set=new Set(state.checkins.map(c=>c.date));
+  const start=addDays(todayStr(),-90);
+  let cells='';
+  for(let i=0;i<91;i++){
+    const d=addDays(start,i);
+    cells+='<i class="'+(set.has(d)?'on':'')+(d===todayStr()?' today':'')+'" title="'+d+'"></i>';
+  }
+  $('#cal').innerHTML=cells;
+  $('#calLegend').textContent=start+' → '+todayStr();
+
+  const list=state.checkins.slice().sort((a,b)=>b.date.localeCompare(a.date));
+  $('#logCount').textContent=list.length+' 次';
+  $('#logBody').innerHTML = list.length? list.map(c=>
+      '<div class="log-item"><div><div class="log-d">'+c.date+'</div>'
+      +'<div class="log-m">词 '+(c.w||0)+' · 句 '+(c.s||0)+' · 问答 '+(c.q||0)+(c.total&&c.count<c.total?' · 部分完成':'')+'</div></div>'
+      +'<div class="mono" style="font-size:13px;color:#1E6B4F">+'+c.count+'</div></div>'
+    ).join('') : '<div class="empty">还没有打卡记录，去「今日」过几张卡片再打卡</div>';
+}
+
+/* ================= 视图切换 ================= */
+function switchView(v){
+  state.view=v; save();
+  $$('.tab').forEach(t=>t.classList.toggle('on',t.dataset.view===v));
+  $$('.view').forEach(x=>x.classList.toggle('on',x.id==='v-'+v));
+  if(v==='today') renderToday();
+  if(v==='words'){ renderWordChips(); renderWords(); }
+  if(v==='sents'){ renderSentChips(); renderSents(); }
+  if(v==='review'){ revQueue=null; renderReview(); }
+  if(v==='today') updateBadge();
+  if(v==='log') renderLog();
+  window.scrollTo({top:0,behavior:'auto'});
+}
+
+/* ================= 事件 ================= */
+document.addEventListener('click',e=>{
+  const t=e.target.closest('[data-say]');
+  if(t){ speak(decodeURIComponent(t.dataset.say), t); return; }
+  const mk=e.target.closest('[data-mark]');
+  if(mk){
+    const id=mk.dataset.mark;
+    const on=!isDone(id);
+    markDone(id,on);
+    renderToday(); return;
+  }
+  const wc=e.target.closest('[data-wcat]');
+  if(wc){ wordCat=wc.dataset.wcat; renderWordChips(); renderWords(); return; }
+  const sc=e.target.closest('[data-scat]');
+  if(sc){ sentCat=sc.dataset.scat; renderSentChips(); renderSents(); return; }
+});
+$$('.tab').forEach(tab=>tab.addEventListener('click',()=>switchView(tab.dataset.view)));
+$('#wordSearch').addEventListener('input',renderWords);
+$('#btnCheck').addEventListener('click',doCheck);
+
+/* ================= 启动 ================= */
+(function init(){
+  // 跨天时清空当日勾选
+  if(state.doneDate!==todayStr()){
+    state.done={}; state.doneDate=todayStr(); save();
+  }
+  switchView(state.view&&document.getElementById('v-'+state.view)?state.view:'today');
+  renderToday(); renderLog();
+})();
+
+</script>
+</body>
+</html>
